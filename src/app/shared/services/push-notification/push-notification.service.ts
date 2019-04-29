@@ -7,7 +7,7 @@ import {environment} from '../../../../environments/environment';
 })
 export class PushNotificationService {
 
-  SERVER_URL = `${environment.domain}/subscription`;
+  SERVER_URL = `${environment.domain}/api/subscription`;
 
   constructor(private http: HttpClient) {
   }
