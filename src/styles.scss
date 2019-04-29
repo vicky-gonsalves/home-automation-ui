@@ -1,0 +1,23 @@
+@import './theme';
+@import '../src/styles/general';
+@import '../src/styles/typography';
+@import '../src/styles/scrollbars';
+@import '../src/styles/forms';
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+
+@media (max-width: 720px) {
+  app-root {
+    top: 0;
+  }
+}
+

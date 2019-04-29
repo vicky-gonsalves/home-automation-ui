@@ -1,0 +1,38 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    {{ title }}
+  </h1>
+
+
+  <form [formGroup]="tankForm" novalidate autocomplete="off">
+    <div *ngIf="currentStatus && currentStatus.tankFilled">
+      <p>Tank Level: <strong>{{currentStatus?.tankFilled}}%</strong></p>
+      <p><small>Last Updated: {{currentStatus?.updatedAt|date:'medium'}}</small></p>
+    </div>
+    <div>
+      <p>Device: <strong>{{currentStatus && currentStatus.websocket ? currentStatus.websocket : 'Disconnected'}}</strong></p>
+    </div>
+    <div>
+      <label><strong>Motor Status</strong></label>
+      <div>
+        <mat-slide-toggle color="green" formControlName="state"
+                          (toggleChange)="changeMotorState()"
+                          [checked]="currentStatus && currentStatus?.motor==='on'">Motor is <strong>{{currentStatus?.motor}}</strong>
+        </mat-slide-toggle>
+      </div>
+    </div>
+    <br/>
+    <div>
+      <label><strong>Motor Mode</strong></label>
+      <div>
+        <mat-slide-toggle formControlName="mode"
+                          (toggleChange)="changeMotorMode()"
+                          [checked]="currentStatus && currentStatus.automate">
+          Motor mode is <strong>{{currentStatus && currentStatus.automate ? 'Automatic' : 'Manual'}}</strong>
+        </mat-slide-toggle>
+      </div>
+    </div>
+  </form>
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,65 @@
+@import '~@angular/material/theming';
+@import './styles/svg-theme';
+
+@mixin app-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $is-dark-theme: map-get($theme, is-dark);
+  $nav-background-opacity: if($is-dark-theme, 0.2, 0.03);
+
+  .comp-app-background {
+    background: rgba(0, 0, 0, $nav-background-opacity);
+  }
+
+  input[readonly] {
+    color: mat-color($foreground, disabled-text);
+  }
+
+  .non-readonly {
+    color: mat-color($foreground, text) !important;
+  }
+
+  .comp-primary-header {
+    h1 {
+      color: mat-color($primary);
+    }
+  }
+
+  .component-page-header {
+    background: mat-color($background, background);
+  }
+
+  .primary-color {
+    color: mat-color($foreground, text);
+  }
+
+  .accent-color {
+    color: mat-color($accent);
+  }
+
+  .warn-color {
+    color: mat-color($warn);
+  }
+
+  .comp-footer {
+    background: mat-color($primary);
+    color: mat-color($primary, default-contrast);
+  }
+
+  .caption_view {
+    color: $dark-secondary-text !important;
+  }
+}
+
+@include mat-core();
+
+/*App theme is defined here*/
+$primary: mat-palette($mat-indigo);
+$accent: mat-palette($mat-red, A200, A100, A400);
+
+$theme: mat-light-theme($primary, $accent);
+@include angular-material-theme($theme);
+@include app-theme($theme);

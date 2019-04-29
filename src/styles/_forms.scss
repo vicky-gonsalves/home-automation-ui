@@ -1,0 +1,22 @@
+*:focus {
+  outline: none !important;
+  border: 0 !important;
+}
+
+button,
+input[type=email],
+input[type=tel],
+input[type=text],
+input[type=password],
+input[type=checkbox],
+input[type=image],
+input[type=submit],
+input[type=button],
+input[type=search],
+textarea {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  outline: none !important;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
