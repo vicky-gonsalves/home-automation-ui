@@ -69,7 +69,7 @@ export class AppComponent implements OnInit {
 
   }
 
-  changeMotorMode(mode: string) {
+  changeMotorMode(mode: boolean) {
     this.getStatusService.putStatus({motor: 'off', automate: mode});
   }
 
