@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {MatDialog, MatDialogConfig} from '@angular/material';
+import {SwPush} from '@angular/service-worker';
 import {ConfirmComponent} from './shared/components/dialogs/confirm/confirm.component';
 import {GetStatus} from './shared/models/get-status';
 import {GetStatusService} from './shared/services/get-status/get-status.service';
+import {PushNotificationService} from './shared/services/push-notification/push-notification.service';
 
 @Component({
   selector: 'app-root',
@@ -15,9 +17,23 @@ export class AppComponent implements OnInit {
   currentStatus: GetStatus;
   showStateButton = true;
   public tankForm: FormGroup;
+  VAPID_PUBLIC_KEY = 'BEJp0Car3wMy9KIBpAwZYJXvmtDynRAUO5FH21f-kD2KDdszayFkoQH7vavJcPmKr_3qO_QSp6mO1AsUi2XavkQ';
+
 
   constructor(private getStatusService: GetStatusService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private pushService: PushNotificationService,
+              swPush: SwPush) {
+    if (swPush.isEnabled) {
+      swPush
+        .requestSubscription({
+          serverPublicKey: this.VAPID_PUBLIC_KEY,
+        })
+        .then(subscription => {
+          pushService.sendSubscriptionToTheServer(subscription).subscribe();
+        })
+        .catch(console.error);
+    }
   }
 
   get state() {
