@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Confirm Action</h1>
+<div mat-dialog-content>
+  <p>Do you want to turn on motor now? This will also switch motor mode to Manual.</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="onNoClick()">No Thanks</button>
+  <button mat-raised-button color="accent" [mat-dialog-close]="true" cdkFocusInitial>Yes Turn on motor</button>
+</div>

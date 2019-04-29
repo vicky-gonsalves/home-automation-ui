@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {ConfirmComponent} from './shared/components/dialogs/confirm/confirm.component';
 import {GetStatus} from './shared/models/get-status';
 import {GetStatusService} from './shared/services/get-status/get-status.service';
 
@@ -9,15 +11,21 @@ import {GetStatusService} from './shared/services/get-status/get-status.service'
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'Tank System';
+  title = 'Automatic Tank System';
   currentStatus: GetStatus;
+  showStateButton = true;
   public tankForm: FormGroup;
 
-  constructor(private getStatusService: GetStatusService) {
+  constructor(private getStatusService: GetStatusService,
+              private dialog: MatDialog) {
   }
 
   get state() {
     return this.tankForm.get('state');
+  }
+
+  get mode() {
+    return this.tankForm.get('mode');
   }
 
   ngOnInit() {
@@ -36,13 +44,32 @@ export class AppComponent implements OnInit {
     });
   }
 
-  changeMotorState() {
-    const status = this.currentStatus && this.currentStatus.motor && this.currentStatus.motor === 'on' ? 'off' : 'on';
-    this.getStatusService.putStatus({motor: status, automate: false});
+  changeMotorState(state: string, e) {
+    if (state === 'on') {
+      const conf: MatDialogConfig = {
+        autoFocus: false,
+        closeOnNavigation: true,
+        panelClass: 'panelClass',
+        maxWidth: '1024px'
+      };
+      const dialogRef = this.dialog.open(ConfirmComponent, conf);
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.getStatusService.putStatus({motor: state, automate: false});
+        } else {
+          this.showStateButton = false;
+          setTimeout(() => {
+            this.showStateButton = true;
+          });
+        }
+      });
+    } else {
+      this.getStatusService.putStatus({motor: state, automate: false});
+    }
+
   }
 
-  changeMotorMode() {
-    const mode = !(this.currentStatus && this.currentStatus.hasOwnProperty('automate') && this.currentStatus.automate);
+  changeMotorMode(mode: string) {
     this.getStatusService.putStatus({motor: 'off', automate: mode});
   }
 

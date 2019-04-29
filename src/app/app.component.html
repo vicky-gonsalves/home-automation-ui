@@ -7,30 +7,45 @@
 
   <form [formGroup]="tankForm" novalidate autocomplete="off">
     <div *ngIf="currentStatus && currentStatus.tankFilled">
-      <p>Tank Level: <strong>{{currentStatus?.tankFilled}}%</strong></p>
-      <p><small>Last Updated: {{currentStatus?.updatedAt|date:'medium'}}</small></p>
+      <p>Tank Level:</p>
+      <h1>{{currentStatus?.tankFilled}}%</h1>
+      <p>
+        <small>Last Updated: {{currentStatus?.updatedAt|date:'medium'}}</small>
+      </p>
     </div>
     <div>
       <p>Device: <strong>{{currentStatus && currentStatus.websocket ? currentStatus.websocket : 'Disconnected'}}</strong></p>
     </div>
     <div>
-      <label><strong>Motor Status</strong></label>
-      <div>
-        <mat-slide-toggle color="green" formControlName="state"
-                          (toggleChange)="changeMotorState()"
-                          [checked]="currentStatus && currentStatus?.motor==='on'">Motor is <strong>{{currentStatus?.motor}}</strong>
-        </mat-slide-toggle>
+      <label><strong>Motor Status : <span class="text-uppercase">{{currentStatus?.motor}}</span></strong></label>
+      <div *ngIf="showStateButton">
+        <mat-button-toggle-group formControlName="state">
+          <mat-button-toggle value="on" [checked]="currentStatus && currentStatus?.motor==='on'"
+                             [disabled]="currentStatus && currentStatus?.motor==='on'" (click)="changeMotorState('on', $event)">
+            ON
+          </mat-button-toggle>
+          <mat-button-toggle value="off" [checked]="currentStatus && currentStatus?.motor==='off'"
+                             [disabled]="currentStatus && currentStatus?.motor==='off'" (click)="changeMotorState('off', $event)">
+            OFF
+          </mat-button-toggle>
+        </mat-button-toggle-group>
       </div>
     </div>
     <br/>
     <div>
-      <label><strong>Motor Mode</strong></label>
+      <label><strong>Motor Mode : <span
+        class="text-uppercase">{{currentStatus && currentStatus.automate ? 'Automatic' : 'Manual'}}</span></strong></label>
       <div>
-        <mat-slide-toggle formControlName="mode"
-                          (toggleChange)="changeMotorMode()"
-                          [checked]="currentStatus && currentStatus.automate">
-          Motor mode is <strong>{{currentStatus && currentStatus.automate ? 'Automatic' : 'Manual'}}</strong>
-        </mat-slide-toggle>
+        <mat-button-toggle-group formControlName="mode">
+          <mat-button-toggle value="true" [checked]="currentStatus && currentStatus.automate===true"
+                             [disabled]="currentStatus && currentStatus.automate===true" (click)="changeMotorMode(true)">
+            Automatic
+          </mat-button-toggle>
+          <mat-button-toggle value="false" [checked]="currentStatus && currentStatus.automate===false"
+                             [disabled]="currentStatus && currentStatus.automate===false" (click)="changeMotorMode(false)">
+            Manual
+          </mat-button-toggle>
+        </mat-button-toggle-group>
       </div>
     </div>
   </form>

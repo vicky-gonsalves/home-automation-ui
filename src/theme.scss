@@ -1,5 +1,7 @@
 @import '~@angular/material/theming';
 @import './styles/svg-theme';
+@import './app/app-component.theme';
+
 
 @mixin app-theme($theme) {
   $primary: map-get($theme, primary);
@@ -52,13 +54,16 @@
   .caption_view {
     color: $dark-secondary-text !important;
   }
+
+  @include app-component-theme($theme);
+
 }
 
 @include mat-core();
 
 /*App theme is defined here*/
 $primary: mat-palette($mat-indigo);
-$accent: mat-palette($mat-red, A200, A100, A400);
+$accent: mat-palette($mat-green);
 
 $theme: mat-light-theme($primary, $accent);
 @include angular-material-theme($theme);
