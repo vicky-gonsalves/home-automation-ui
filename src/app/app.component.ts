@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
               private pushService: PushNotificationService,
               swPush: SwPush) {
     if (swPush.isEnabled) {
+      console.log('Notifications enabled');
       swPush
         .requestSubscription({
           serverPublicKey: this.VAPID_PUBLIC_KEY,
