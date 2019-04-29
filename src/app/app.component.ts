@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
         autoFocus: false,
         closeOnNavigation: true,
         panelClass: 'panelClass',
-        maxWidth: '1024px'
+        maxWidth: '320px'
       };
       const dialogRef = this.dialog.open(ConfirmComponent, conf);
       dialogRef.afterClosed().subscribe(result => {
