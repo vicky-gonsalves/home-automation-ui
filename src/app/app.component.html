@@ -32,7 +32,7 @@
       </div>
     </div>
     <br/>
-    <div>
+    <div class="m-b-10">
       <label><strong>Motor Mode : <span
         class="text-uppercase">{{currentStatus && currentStatus.automate ? 'Automatic' : 'Manual'}}</span></strong></label>
       <div>
@@ -44,6 +44,105 @@
           <mat-button-toggle value="false" [checked]="currentStatus && currentStatus.automate===false"
                              [disabled]="currentStatus && currentStatus.automate===false" (click)="changeMotorMode(false)">
             Manual
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="m-t-10 m-b-10">
+      <label><strong>Light 1 : <span
+        class="text-uppercase">{{currentLightStatus && currentLightStatus.light1 ? 'ON' : 'OFF'}}</span></strong></label>
+      <div>
+        <mat-button-toggle-group formControlName="light1">
+          <mat-button-toggle value="true" [checked]="currentLightStatus && currentLightStatus.light1===true"
+                             [disabled]="currentLightStatus && currentLightStatus.light1===true" (click)="changeLightMode(1,true)">
+            ON
+          </mat-button-toggle>
+          <mat-button-toggle value="false" [checked]="currentLightStatus && currentLightStatus.light1===false"
+                             [disabled]="currentLightStatus && currentLightStatus.light1===false" (click)="changeLightMode(1, false)">
+            OFF
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+    <div class="m-t-10 m-b-10">
+      <label><strong>Light 2 : <span
+        class="text-uppercase">{{currentLightStatus && currentLightStatus.light2 ? 'ON' : 'OFF'}}</span></strong></label>
+      <div>
+        <mat-button-toggle-group formControlName="light2">
+          <mat-button-toggle value="true" [checked]="currentLightStatus && currentLightStatus.light2===true"
+                             [disabled]="currentLightStatus && currentLightStatus.light2===true" (click)="changeLightMode(2,true)">
+            ON
+          </mat-button-toggle>
+          <mat-button-toggle value="false" [checked]="currentLightStatus && currentLightStatus.light2===false"
+                             [disabled]="currentLightStatus && currentLightStatus.light2===false" (click)="changeLightMode(2, false)">
+            OFF
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+    <div class="m-t-10 m-b-10">
+      <label><strong>Light 3 : <span
+        class="text-uppercase">{{currentLightStatus && currentLightStatus.light3 ? 'ON' : 'OFF'}}</span></strong></label>
+      <div>
+        <mat-button-toggle-group formControlName="light3">
+          <mat-button-toggle value="true" [checked]="currentLightStatus && currentLightStatus.light3===true"
+                             [disabled]="currentLightStatus && currentLightStatus.light3===true" (click)="changeLightMode(3,true)">
+            ON
+          </mat-button-toggle>
+          <mat-button-toggle value="false" [checked]="currentLightStatus && currentLightStatus.light3===false"
+                             [disabled]="currentLightStatus && currentLightStatus.light3===false" (click)="changeLightMode(3, false)">
+            OFF
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+    <div class="m-t-10 m-b-10">
+      <label><strong>Light 4 : <span
+        class="text-uppercase">{{currentLightStatus && currentLightStatus.light4 ? 'ON' : 'OFF'}}</span></strong></label>
+      <div>
+        <mat-button-toggle-group formControlName="light4">
+          <mat-button-toggle value="true" [checked]="currentLightStatus && currentLightStatus.light4===true"
+                             [disabled]="currentLightStatus && currentLightStatus.light3===true" (click)="changeLightMode(4,true)">
+            ON
+          </mat-button-toggle>
+          <mat-button-toggle value="false" [checked]="currentLightStatus && currentLightStatus.light4===false"
+                             [disabled]="currentLightStatus && currentLightStatus.light4===false" (click)="changeLightMode(4, false)">
+            OFF
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="m-t-10 m-b-10">
+      <label><strong>All Lights : <span
+        class="text-uppercase">{{currentLightStatus && currentLightStatus.allLights ? 'ON' : 'OFF'}}</span></strong></label>
+      <div>
+        <mat-button-toggle-group formControlName="allLights">
+          <mat-button-toggle value="true" [checked]="currentLightStatus && currentLightStatus.allLights===true"
+                             [disabled]="currentLightStatus && currentLightStatus.allLights===true" (click)="changeLightMode(5,true)">
+            ON
+          </mat-button-toggle>
+          <mat-button-toggle value="false" [checked]="currentLightStatus && currentLightStatus.allLights===false"
+                             [disabled]="currentLightStatus && currentLightStatus.allLights===false" (click)="changeLightMode(5, false)">
+            OFF
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="m-t-10 m-b-10">
+      <label><strong>OTA Mode : <span
+        class="text-uppercase">{{currentLightStatus && currentLightStatus.flag ? 'ON' : 'OFF'}}</span></strong></label>
+      <div>
+        <mat-button-toggle-group formControlName="otaMode">
+          <mat-button-toggle value="true" [checked]="currentLightStatus && currentLightStatus.flag===true"
+                             [disabled]="currentLightStatus && currentLightStatus.flag===true" (click)="changeOTAMode(true)">
+            ON
+          </mat-button-toggle>
+          <mat-button-toggle value="false" [checked]="currentLightStatus && currentLightStatus.flag===false"
+                             [disabled]="currentLightStatus && currentLightStatus.flag===false" (click)="changeOTAMode(false)">
+            OFF
           </mat-button-toggle>
         </mat-button-toggle-group>
       </div>

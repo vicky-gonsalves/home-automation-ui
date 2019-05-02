@@ -5,6 +5,7 @@ import {MatButtonModule} from '@angular/material';
 
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatDividerModule} from '@angular/material/divider';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
@@ -28,6 +29,7 @@ const config: SocketIoConfig = {url: environment.domain, options: {}};
     MatDialogModule,
     MatButtonModule,
     MatButtonToggleModule,
+    MatDividerModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
