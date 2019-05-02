@@ -131,22 +131,22 @@
       </div>
     </div>
     <mat-divider></mat-divider>
-    <div class="m-t-10 m-b-10">
-      <label><strong>OTA Mode : <span
-        class="text-uppercase">{{currentLightStatus && currentLightStatus.flag ? 'ON' : 'OFF'}}</span></strong></label>
-      <div>
-        <mat-button-toggle-group formControlName="otaMode">
-          <mat-button-toggle value="true" [checked]="currentLightStatus && currentLightStatus.flag===true"
-                             [disabled]="currentLightStatus && currentLightStatus.flag===true" (click)="changeOTAMode(true)">
-            ON
-          </mat-button-toggle>
-          <mat-button-toggle value="false" [checked]="currentLightStatus && currentLightStatus.flag===false"
-                             [disabled]="currentLightStatus && currentLightStatus.flag===false" (click)="changeOTAMode(false)">
-            OFF
-          </mat-button-toggle>
-        </mat-button-toggle-group>
-      </div>
-    </div>
+    <!--<div class="m-t-10 m-b-10">-->
+      <!--<label><strong>OTA Mode : <span-->
+        <!--class="text-uppercase">{{currentLightStatus && currentLightStatus.flag ? 'ON' : 'OFF'}}</span></strong></label>-->
+      <!--<div>-->
+        <!--<mat-button-toggle-group formControlName="otaMode">-->
+          <!--<mat-button-toggle value="true" [checked]="currentLightStatus && currentLightStatus.flag===true"-->
+                             <!--[disabled]="currentLightStatus && currentLightStatus.flag===true" (click)="changeOTAMode(true)">-->
+            <!--ON-->
+          <!--</mat-button-toggle>-->
+          <!--<mat-button-toggle value="false" [checked]="currentLightStatus && currentLightStatus.flag===false"-->
+                             <!--[disabled]="currentLightStatus && currentLightStatus.flag===false" (click)="changeOTAMode(false)">-->
+            <!--OFF-->
+          <!--</mat-button-toggle>-->
+        <!--</mat-button-toggle-group>-->
+      <!--</div>-->
+    <!--</div>-->
   </form>
   <router-outlet></router-outlet>
 </div>
