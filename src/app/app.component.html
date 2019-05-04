@@ -9,6 +9,8 @@
     <div *ngIf="currentStatus && currentStatus.tankFilled">
       <p>Tank Level:</p>
       <h1>{{currentStatus?.tankFilled}}%</h1>
+      <h3>({{currentStatus?.waterHeight}} cm)</h3>
+      <h3>(approx. {{currentStatus.tankFilled*10}} Litres)</h3>
       <p>
         <small>Last Updated: {{currentStatus?.updatedAt|date:'medium'}}</small>
       </p>
