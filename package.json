@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start": "./node_modules/.bin/forever server.js"
+    "start": "./node_modules/.bin/forever server.js",
+    "prod_push_and_deploy": "git push origin HEAD:master && git push heroku HEAD:master"
   },
   "private": true,
   "dependencies": {
