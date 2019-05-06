@@ -111,6 +111,10 @@ export class AppComponent implements OnInit {
     this.getStatusService.putStatus({motor: 'off', automate: mode});
   }
 
+  changeCutoffMode() {
+    this.getStatusService.putStatus({skipCutoff: !this.currentStatus.skipCutoff});
+  }
+
   changeLightMode(light: number, mode: boolean) {
     if (light === 1) {
       this.lightService.putLightStatus({light1: mode});

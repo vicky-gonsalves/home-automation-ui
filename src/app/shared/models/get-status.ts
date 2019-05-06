@@ -3,6 +3,7 @@ export class GetStatus {
   identifier: string;
   motor: string;
   automate: boolean;
+  skipCutoff: boolean;
   tankFilled: number;
   waterHeight: number;
   websocket: string;

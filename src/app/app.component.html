@@ -7,148 +7,154 @@
 
   <form [formGroup]="tankForm" novalidate autocomplete="off">
     <div *ngIf="currentStatus && currentStatus.tankFilled">
-      <p>Tank Level:</p>
+      <p>
+        <small>Tank Level: ({{currentStatus?.waterHeight}} cm / approx. {{currentStatus.tankFilled * 10}} Litres)</small>
+      </p>
       <h1>{{currentStatus?.tankFilled}}%</h1>
-      <h3>({{currentStatus?.waterHeight}} cm)</h3>
-      <h3>(approx. {{currentStatus.tankFilled*10}} Litres)</h3>
       <p>
         <small>Last Updated: {{currentStatus?.updatedAt|date:'medium'}}</small>
       </p>
     </div>
     <div>
-      <p>Device: <strong>{{currentStatus && currentStatus.websocket ? currentStatus.websocket : 'Disconnected'}}</strong></p>
+      <p>Tank Device: <strong>{{currentStatus && currentStatus.websocket ? currentStatus.websocket : 'Disconnected'}}</strong></p>
     </div>
+    <div *ngIf="currentStatus && currentStatus.websocket && currentStatus.websocket==='disconnected'">
+      <p>Power outage or Device's internet connection is lost. Please wait until device is back online.</p>
+    </div>
+    <div *ngIf="currentStatus && currentStatus.websocket && currentStatus.websocket==='connected'">
+      <div>
+        <label><strong>Motor Status : <span class="text-uppercase">{{currentStatus?.motor}}</span></strong></label>
+        <div *ngIf="showStateButton">
+          <mat-button-toggle-group formControlName="state">
+            <mat-button-toggle value="on" [checked]="currentStatus && currentStatus?.motor==='on'"
+                               [disabled]="currentStatus && currentStatus?.motor==='on'" (click)="changeMotorState('on', $event)">
+              ON
+            </mat-button-toggle>
+            <mat-button-toggle value="off" [checked]="currentStatus && currentStatus?.motor==='off'"
+                               [disabled]="currentStatus && currentStatus?.motor==='off'" (click)="changeMotorState('off', $event)">
+              OFF
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </div>
+      <br/>
+      <div>
+        <label><strong>Motor Cutoff Status : <span
+          class="text-uppercase">{{currentStatus && currentStatus.skipCutoff ? 'Motor will not cutoff' : 'Motor will cutoff'}}</span></strong></label>
+        <div>
+          <mat-checkbox [checked]="currentStatus && currentStatus?.skipCutoff" (change)="changeCutoffMode()">Don't Cutoff</mat-checkbox>
+        </div>
+      </div>
+      <br/>
+      <div class="m-b-10">
+        <label><strong>Motor Mode : <span
+          class="text-uppercase">{{currentStatus && currentStatus.automate ? 'Automatic' : 'Manual'}}</span></strong></label>
+        <div>
+          <mat-button-toggle-group formControlName="mode">
+            <mat-button-toggle value="true" [checked]="currentStatus && currentStatus.automate===true"
+                               [disabled]="currentStatus && currentStatus.automate===true" (click)="changeMotorMode(true)">
+              Automatic
+            </mat-button-toggle>
+            <mat-button-toggle value="false" [checked]="currentStatus && currentStatus.automate===false"
+                               [disabled]="currentStatus && currentStatus.automate===false" (click)="changeMotorMode(false)">
+              Manual
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
     <div>
-      <label><strong>Motor Status : <span class="text-uppercase">{{currentStatus?.motor}}</span></strong></label>
-      <div *ngIf="showStateButton">
-        <mat-button-toggle-group formControlName="state">
-          <mat-button-toggle value="on" [checked]="currentStatus && currentStatus?.motor==='on'"
-                             [disabled]="currentStatus && currentStatus?.motor==='on'" (click)="changeMotorState('on', $event)">
-            ON
-          </mat-button-toggle>
-          <mat-button-toggle value="off" [checked]="currentStatus && currentStatus?.motor==='off'"
-                             [disabled]="currentStatus && currentStatus?.motor==='off'" (click)="changeMotorState('off', $event)">
-            OFF
-          </mat-button-toggle>
-        </mat-button-toggle-group>
-      </div>
+      <p>Lights Device:
+        <strong>{{currentLightStatus && currentLightStatus.websocket ? currentLightStatus.websocket : 'Disconnected'}}</strong></p>
     </div>
-    <br/>
-    <div class="m-b-10">
-      <label><strong>Motor Mode : <span
-        class="text-uppercase">{{currentStatus && currentStatus.automate ? 'Automatic' : 'Manual'}}</span></strong></label>
-      <div>
-        <mat-button-toggle-group formControlName="mode">
-          <mat-button-toggle value="true" [checked]="currentStatus && currentStatus.automate===true"
-                             [disabled]="currentStatus && currentStatus.automate===true" (click)="changeMotorMode(true)">
-            Automatic
-          </mat-button-toggle>
-          <mat-button-toggle value="false" [checked]="currentStatus && currentStatus.automate===false"
-                             [disabled]="currentStatus && currentStatus.automate===false" (click)="changeMotorMode(false)">
-            Manual
-          </mat-button-toggle>
-        </mat-button-toggle-group>
-      </div>
+    <div *ngIf="currentLightStatus && currentLightStatus.websocket && currentLightStatus.websocket==='disconnected'">
+      <p>Power outage or Device's internet connection is lost. Please wait until device is back online.</p>
     </div>
-    <mat-divider></mat-divider>
-    <div class="m-t-10 m-b-10">
-      <label><strong>Outdoor Light 1 : <span
-        class="text-uppercase">{{currentLightStatus && currentLightStatus.light1 ? 'ON' : 'OFF'}}</span></strong></label>
-      <div>
-        <mat-button-toggle-group formControlName="light1">
-          <mat-button-toggle value="true" [checked]="currentLightStatus && currentLightStatus.light1===true"
-                             [disabled]="currentLightStatus && currentLightStatus.light1===true" (click)="changeLightMode(1,true)">
-            ON
-          </mat-button-toggle>
-          <mat-button-toggle value="false" [checked]="currentLightStatus && currentLightStatus.light1===false"
-                             [disabled]="currentLightStatus && currentLightStatus.light1===false" (click)="changeLightMode(1, false)">
-            OFF
-          </mat-button-toggle>
-        </mat-button-toggle-group>
+    <div *ngIf="currentLightStatus && currentLightStatus.websocket && currentLightStatus.websocket==='connected'">
+      <div class="m-t-10 m-b-10">
+        <label><strong>Outdoor Light 1 : <span
+          class="text-uppercase">{{currentLightStatus && currentLightStatus.light1 ? 'ON' : 'OFF'}}</span></strong></label>
+        <div>
+          <mat-button-toggle-group formControlName="light1">
+            <mat-button-toggle value="true" [checked]="currentLightStatus && currentLightStatus.light1===true"
+                               [disabled]="currentLightStatus && currentLightStatus.light1===true" (click)="changeLightMode(1,true)">
+              ON
+            </mat-button-toggle>
+            <mat-button-toggle value="false" [checked]="currentLightStatus && currentLightStatus.light1===false"
+                               [disabled]="currentLightStatus && currentLightStatus.light1===false" (click)="changeLightMode(1, false)">
+              OFF
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
       </div>
-    </div>
-    <div class="m-t-10 m-b-10">
-      <label><strong>Outdoor Light 2 : <span
-        class="text-uppercase">{{currentLightStatus && currentLightStatus.light2 ? 'ON' : 'OFF'}}</span></strong></label>
-      <div>
-        <mat-button-toggle-group formControlName="light2">
-          <mat-button-toggle value="true" [checked]="currentLightStatus && currentLightStatus.light2===true"
-                             [disabled]="currentLightStatus && currentLightStatus.light2===true" (click)="changeLightMode(2,true)">
-            ON
-          </mat-button-toggle>
-          <mat-button-toggle value="false" [checked]="currentLightStatus && currentLightStatus.light2===false"
-                             [disabled]="currentLightStatus && currentLightStatus.light2===false" (click)="changeLightMode(2, false)">
-            OFF
-          </mat-button-toggle>
-        </mat-button-toggle-group>
+      <div class="m-t-10 m-b-10">
+        <label><strong>Outdoor Light 2 : <span
+          class="text-uppercase">{{currentLightStatus && currentLightStatus.light2 ? 'ON' : 'OFF'}}</span></strong></label>
+        <div>
+          <mat-button-toggle-group formControlName="light2">
+            <mat-button-toggle value="true" [checked]="currentLightStatus && currentLightStatus.light2===true"
+                               [disabled]="currentLightStatus && currentLightStatus.light2===true" (click)="changeLightMode(2,true)">
+              ON
+            </mat-button-toggle>
+            <mat-button-toggle value="false" [checked]="currentLightStatus && currentLightStatus.light2===false"
+                               [disabled]="currentLightStatus && currentLightStatus.light2===false" (click)="changeLightMode(2, false)">
+              OFF
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
       </div>
-    </div>
-    <div class="m-t-10 m-b-10">
-      <label><strong>Outdoor Light 3 : <span
-        class="text-uppercase">{{currentLightStatus && currentLightStatus.light3 ? 'ON' : 'OFF'}}</span></strong></label>
-      <div>
-        <mat-button-toggle-group formControlName="light3">
-          <mat-button-toggle value="true" [checked]="currentLightStatus && currentLightStatus.light3===true"
-                             [disabled]="currentLightStatus && currentLightStatus.light3===true" (click)="changeLightMode(3,true)">
-            ON
-          </mat-button-toggle>
-          <mat-button-toggle value="false" [checked]="currentLightStatus && currentLightStatus.light3===false"
-                             [disabled]="currentLightStatus && currentLightStatus.light3===false" (click)="changeLightMode(3, false)">
-            OFF
-          </mat-button-toggle>
-        </mat-button-toggle-group>
+      <div class="m-t-10 m-b-10">
+        <label><strong>Outdoor Light 3 : <span
+          class="text-uppercase">{{currentLightStatus && currentLightStatus.light3 ? 'ON' : 'OFF'}}</span></strong></label>
+        <div>
+          <mat-button-toggle-group formControlName="light3">
+            <mat-button-toggle value="true" [checked]="currentLightStatus && currentLightStatus.light3===true"
+                               [disabled]="currentLightStatus && currentLightStatus.light3===true" (click)="changeLightMode(3,true)">
+              ON
+            </mat-button-toggle>
+            <mat-button-toggle value="false" [checked]="currentLightStatus && currentLightStatus.light3===false"
+                               [disabled]="currentLightStatus && currentLightStatus.light3===false" (click)="changeLightMode(3, false)">
+              OFF
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
       </div>
-    </div>
-    <div class="m-t-10 m-b-10">
-      <label><strong>Street Light 4 : <span
-        class="text-uppercase">{{currentLightStatus && currentLightStatus.light4 ? 'ON' : 'OFF'}}</span></strong></label>
-      <div>
-        <mat-button-toggle-group formControlName="light4">
-          <mat-button-toggle value="true" [checked]="currentLightStatus && currentLightStatus.light4===true"
-                             [disabled]="currentLightStatus && currentLightStatus.light3===true" (click)="changeLightMode(4,true)">
-            ON
-          </mat-button-toggle>
-          <mat-button-toggle value="false" [checked]="currentLightStatus && currentLightStatus.light4===false"
-                             [disabled]="currentLightStatus && currentLightStatus.light4===false" (click)="changeLightMode(4, false)">
-            OFF
-          </mat-button-toggle>
-        </mat-button-toggle-group>
+      <div class="m-t-10 m-b-10">
+        <label><strong>Street Light 4 : <span
+          class="text-uppercase">{{currentLightStatus && currentLightStatus.light4 ? 'ON' : 'OFF'}}</span></strong></label>
+        <div>
+          <mat-button-toggle-group formControlName="light4">
+            <mat-button-toggle value="true" [checked]="currentLightStatus && currentLightStatus.light4===true"
+                               [disabled]="currentLightStatus && currentLightStatus.light3===true" (click)="changeLightMode(4,true)">
+              ON
+            </mat-button-toggle>
+            <mat-button-toggle value="false" [checked]="currentLightStatus && currentLightStatus.light4===false"
+                               [disabled]="currentLightStatus && currentLightStatus.light4===false" (click)="changeLightMode(4, false)">
+              OFF
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
       </div>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="m-t-10 m-b-10">
-      <label><strong>All Lights : <span
-        class="text-uppercase">{{currentLightStatus && currentLightStatus.allLights ? 'ON' : 'OFF'}}</span></strong></label>
-      <div>
-        <mat-button-toggle-group formControlName="allLights">
-          <mat-button-toggle value="true" [checked]="currentLightStatus && currentLightStatus.allLights===true"
-                             [disabled]="currentLightStatus && currentLightStatus.allLights===true" (click)="changeLightMode(5,true)">
-            ON
-          </mat-button-toggle>
-          <mat-button-toggle value="false" [checked]="currentLightStatus && currentLightStatus.allLights===false"
-                             [disabled]="currentLightStatus && currentLightStatus.allLights===false" (click)="changeLightMode(5, false)">
-            OFF
-          </mat-button-toggle>
-        </mat-button-toggle-group>
+      <mat-divider></mat-divider>
+      <div class="m-t-10 m-b-10">
+        <label><strong>All Lights : <span
+          class="text-uppercase">{{currentLightStatus && currentLightStatus.allLights ? 'ON' : 'OFF'}}</span></strong></label>
+        <div>
+          <mat-button-toggle-group formControlName="allLights">
+            <mat-button-toggle value="true" [checked]="currentLightStatus && currentLightStatus.allLights===true"
+                               [disabled]="currentLightStatus && currentLightStatus.allLights===true" (click)="changeLightMode(5,true)">
+              ON
+            </mat-button-toggle>
+            <mat-button-toggle value="false" [checked]="currentLightStatus && currentLightStatus.allLights===false"
+                               [disabled]="currentLightStatus && currentLightStatus.allLights===false" (click)="changeLightMode(5, false)">
+              OFF
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
       </div>
+      <mat-divider></mat-divider>
     </div>
-    <mat-divider></mat-divider>
-    <!--<div class="m-t-10 m-b-10">-->
-      <!--<label><strong>OTA Mode : <span-->
-        <!--class="text-uppercase">{{currentLightStatus && currentLightStatus.flag ? 'ON' : 'OFF'}}</span></strong></label>-->
-      <!--<div>-->
-        <!--<mat-button-toggle-group formControlName="otaMode">-->
-          <!--<mat-button-toggle value="true" [checked]="currentLightStatus && currentLightStatus.flag===true"-->
-                             <!--[disabled]="currentLightStatus && currentLightStatus.flag===true" (click)="changeOTAMode(true)">-->
-            <!--ON-->
-          <!--</mat-button-toggle>-->
-          <!--<mat-button-toggle value="false" [checked]="currentLightStatus && currentLightStatus.flag===false"-->
-                             <!--[disabled]="currentLightStatus && currentLightStatus.flag===false" (click)="changeOTAMode(false)">-->
-            <!--OFF-->
-          <!--</mat-button-toggle>-->
-        <!--</mat-button-toggle-group>-->
-      <!--</div>-->
-    <!--</div>-->
   </form>
   <router-outlet></router-outlet>
 </div>
