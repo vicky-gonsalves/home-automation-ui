@@ -6,7 +6,8 @@ export class Light {
   light3: boolean;
   light4: boolean;
   allLights?: boolean;
-  flag: boolean
+  websocket: string;
+  flag: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
