@@ -7,6 +7,7 @@ export class Log {
   tankFilled: number;
   waterHeight?: boolean;
   skipCutoff: boolean;
+  updatedByDevice: boolean;
   websocket: boolean;
   createdAt: Date;
   updatedAt: Date;
