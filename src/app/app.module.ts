@@ -1,7 +1,14 @@
 import {HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatButtonModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatTableModule,
+  MatTooltipModule
+} from '@angular/material';
 
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -14,6 +21,7 @@ import {environment} from '../environments/environment';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import {LogComponent} from './modules/log/log.component';
 import {ConfirmComponent} from './shared/components/dialogs/confirm/confirm.component';
 
 const config: SocketIoConfig = {url: environment.domain, options: {}};
@@ -21,7 +29,8 @@ const config: SocketIoConfig = {url: environment.domain, options: {}};
 @NgModule({
   declarations: [
     AppComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    LogComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -30,8 +39,13 @@ const config: SocketIoConfig = {url: environment.domain, options: {}};
     MatDialogModule,
     MatButtonModule,
     MatButtonToggleModule,
+    MatProgressBarModule,
+    MatTableModule,
+    MatCardModule,
     MatCheckboxModule,
+    MatTooltipModule,
     MatDividerModule,
+    MatPaginatorModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

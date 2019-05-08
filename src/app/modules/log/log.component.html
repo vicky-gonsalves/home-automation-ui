@@ -1,0 +1,90 @@
+<mat-divider></mat-divider>
+<div class="page"></div>
+<mat-card class="list" *ngIf="!dataSource">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <div *ngIf="!inProgress" class="content" fxLayout="column" fxLayoutAlign="center center">
+      <h1>No Data Available</h1>
+      <a class="back-link" [routerLink]="'/'">Go back to dashboard</a>
+    </div>
+    <div *ngIf="inProgress" class="content" fxLayout="column" fxLayoutAlign="center center">
+      <h2>Loading...</h2>
+    </div>
+  </div>
+</mat-card>
+<mat-card class="list-wrapper" *ngIf="dataSource">
+  <div class="list-table">
+    <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef>id</mat-header-cell>
+        <mat-cell *matCellDef="let element"><span
+          matTooltip="{{element.id}}">{{element.id}}</span></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef>action</mat-header-cell>
+        <mat-cell *matCellDef="let element"><span
+          matTooltip="{{element.action}}">{{element.action}}</span></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="motorOn">
+        <mat-header-cell *matHeaderCellDef>motorOn</mat-header-cell>
+        <mat-cell *matCellDef="let element"><span
+          matTooltip="{{element.motorOn}}">{{element.motorOn}}</span></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="cutOff">
+        <mat-header-cell *matHeaderCellDef>cutOff</mat-header-cell>
+        <mat-cell *matCellDef="let element"><span
+          matTooltip="{{element.cutOff}}">{{element.cutOff}}</span></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="automate">
+        <mat-header-cell *matHeaderCellDef>automate</mat-header-cell>
+        <mat-cell *matCellDef="let element"><span
+          matTooltip="{{element.automate}}">{{element.automate}}</span></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="tankFilled">
+        <mat-header-cell *matHeaderCellDef>tankFilled</mat-header-cell>
+        <mat-cell *matCellDef="let element"><span
+          matTooltip="{{element.tankFilled}}">{{element.tankFilled}}</span></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="waterHeight">
+        <mat-header-cell *matHeaderCellDef>waterHeight</mat-header-cell>
+        <mat-cell *matCellDef="let element"><span
+          matTooltip="{{element.waterHeight}}">{{element.waterHeight}}</span></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="skipCutoff">
+        <mat-header-cell *matHeaderCellDef>skipCutoff</mat-header-cell>
+        <mat-cell *matCellDef="let element"><span
+          matTooltip="{{element.skipCutoff}}">{{element.skipCutoff}}</span></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="websocket">
+        <mat-header-cell *matHeaderCellDef>websocket</mat-header-cell>
+        <mat-cell *matCellDef="let element"><span
+          matTooltip="{{element.websocket}}">{{element.websocket}}</span></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="createdAt">
+        <mat-header-cell *matHeaderCellDef>createdAt</mat-header-cell>
+        <mat-cell *matCellDef="let element"><span
+          matTooltip="{{element.createdAt}}">{{element.createdAt|date:'medium'}}</span></mat-cell>
+      </ng-container>
+
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+  <mat-paginator #paginator
+                 [length]="paginatorOptions.count"
+                 [pageSize]="paginatorOptions.pageSize"
+                 [pageSizeOptions]="paginatorOptions.pageSizeOptions"
+                 [showFirstLastButtons]="paginatorOptions.showFirstLastButtons"
+                 (page)="fetchLogListing($event)">
+  </mat-paginator>
+</mat-card>
+
