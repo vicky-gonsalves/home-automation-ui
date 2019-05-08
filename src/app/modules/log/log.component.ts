@@ -10,8 +10,8 @@ import {LogService} from '../../shared/services/log/log.service';
 })
 export class LogComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  public displayedColumns = ['id', 'action', 'motorOn', 'cutOff', 'automate',
-    'tankFilled', 'waterHeight', 'skipCutoff', 'websocket', 'createdAt'];
+  public displayedColumns = ['createdAt', 'action', 'motorOn', 'cutOff', 'automate',
+    'tankFilled', 'waterHeight', 'skipCutoff', 'websocket', 'id'];
   public dataSource: MatTableDataSource<Log>;
   public paginatorOptions = {
     count: 0,
@@ -43,9 +43,10 @@ export class LogComponent implements OnInit {
     this.inProgress = true;
     this.logService.getLogs(options)
       .subscribe(response => {
-          if (response && response.data && response.data.rows && response.data.rows.length) {
-            this.dataSource = new MatTableDataSource(response.data.rows);
-            this.paginatorOptions.count = response.data.count;
+          console.log(response);
+          if (response && response.rows && response.rows.length) {
+            this.dataSource = new MatTableDataSource(response.rows);
+            this.paginatorOptions.count = response.count;
           } else {
             console.log('no data');
           }

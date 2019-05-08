@@ -21,3 +21,22 @@ app-root {
   }
 }
 
+
+.list {
+  width: 95%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.list-wrapper {
+  width: 95%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  .list-table {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    overflow-x: auto;
+  }
+}

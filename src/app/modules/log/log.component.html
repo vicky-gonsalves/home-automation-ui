@@ -13,7 +13,7 @@
 </mat-card>
 <mat-card class="list-wrapper" *ngIf="dataSource">
   <div class="list-table">
-    <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+    <mat-table #table [dataSource]="dataSource">
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef>id</mat-header-cell>
         <mat-cell *matCellDef="let element"><span

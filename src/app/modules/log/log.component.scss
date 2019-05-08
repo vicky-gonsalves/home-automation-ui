@@ -1,0 +1,14 @@
+.mat-column-id,
+.mat-column-createdAt{
+  min-width: 250px;
+}
+.mat-column-action,
+.mat-column-motorOn,
+.mat-column-automate,
+.mat-column-tankFilled,
+.mat-column-waterHeight,
+.mat-column-skipCutoff,
+.mat-column-websocket,
+.mat-column-cutOff {
+  min-width: 150px;
+}

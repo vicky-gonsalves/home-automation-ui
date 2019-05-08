@@ -1,7 +1,6 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
 import {environment} from '../../../../environments/environment';
 
 @Injectable({
@@ -20,13 +19,6 @@ export class LogService {
         params = params.append(key, options[key]);
       }
     }
-    this.updateLoading(true);
-    return this.http.get<any>(`${this.apiUrl}`, {params})
-      .pipe(
-        tap(() => this.updateLoading(false)));
-  }
-
-
-  private updateLoading(flag: boolean): void {
+    return this.http.get<any>(`${this.apiUrl}`, {params});
   }
 }
