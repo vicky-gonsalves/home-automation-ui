@@ -7,6 +7,7 @@ export class GetStatus {
   tankFilled: number;
   waterHeight: number;
   websocket: string;
+  updatedByDevice: boolean;
   createdAt: Date;
   updatedAt: Date;
 }

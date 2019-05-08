@@ -39,14 +39,14 @@
         </div>
       </div>
       <br/>
-      <div>
-        <label><strong>Motor Cutoff Status : <span
-          class="text-uppercase">{{currentStatus && currentStatus.skipCutoff ? 'Motor will not cutoff' : 'Motor will cutoff'}}</span></strong></label>
-        <div>
-          <mat-checkbox [checked]="currentStatus && currentStatus?.skipCutoff" (change)="changeCutoffMode()">Don't Cutoff</mat-checkbox>
-        </div>
-      </div>
-      <br/>
+      <!--<div>-->
+        <!--<label><strong>Motor Cutoff Status : <span-->
+          <!--class="text-uppercase">{{currentStatus && currentStatus.skipCutoff ? 'Motor will not cutoff' : 'Motor will cutoff'}}</span></strong></label>-->
+        <!--<div>-->
+          <!--<mat-checkbox [checked]="currentStatus && currentStatus?.skipCutoff" (change)="changeCutoffMode()">Don't Cutoff</mat-checkbox>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<br/>-->
       <div class="m-b-10">
         <label><strong>Motor Mode : <span
           class="text-uppercase">{{currentStatus && currentStatus.automate ? 'Automatic' : 'Manual'}}</span></strong></label>

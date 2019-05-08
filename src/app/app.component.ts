@@ -93,7 +93,7 @@ export class AppComponent implements OnInit {
       const dialogRef = this.dialog.open(ConfirmComponent, conf);
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.getStatusService.putStatus({motor: state, automate: false});
+          this.getStatusService.putStatus({motor: state, automate: false, updatedByDevice: false});
         } else {
           this.showStateButton = false;
           setTimeout(() => {
@@ -102,34 +102,34 @@ export class AppComponent implements OnInit {
         }
       });
     } else {
-      this.getStatusService.putStatus({motor: state, automate: false});
+      this.getStatusService.putStatus({motor: state, automate: false, updatedByDevice: false});
     }
 
   }
 
   changeMotorMode(mode: boolean) {
-    this.getStatusService.putStatus({motor: 'off', automate: mode});
+    this.getStatusService.putStatus({motor: 'off', automate: mode, updatedByDevice: false});
   }
 
   changeCutoffMode() {
-    this.getStatusService.putStatus({skipCutoff: !this.currentStatus.skipCutoff});
+    this.getStatusService.putStatus({skipCutoff: !this.currentStatus.skipCutoff, updatedByDevice: false});
   }
 
   changeLightMode(light: number, mode: boolean) {
     if (light === 1) {
-      this.lightService.putLightStatus({light1: mode});
+      this.lightService.putLightStatus({light1: mode, updatedByDevice: false});
     }
     if (light === 2) {
-      this.lightService.putLightStatus({light2: mode});
+      this.lightService.putLightStatus({light2: mode, updatedByDevice: false});
     }
     if (light === 3) {
-      this.lightService.putLightStatus({light3: mode});
+      this.lightService.putLightStatus({light3: mode, updatedByDevice: false});
     }
     if (light === 4) {
-      this.lightService.putLightStatus({light4: mode});
+      this.lightService.putLightStatus({light4: mode, updatedByDevice: false});
     }
     if (light === 5) {
-      this.lightService.putLightStatus({light1: mode, light2: mode, light3: mode, light4: mode});
+      this.lightService.putLightStatus({light1: mode, light2: mode, light3: mode, light4: mode, updatedByDevice: false});
     }
   }
 
