@@ -25,7 +25,7 @@
     <div *ngIf="currentStatus && currentStatus.websocket && currentStatus.websocket==='connected'">
       <div>
         <label><strong>Motor Status : <span class="text-uppercase">{{currentStatus?.motor}}</span></strong></label>
-        <div *ngIf="showStateButton">
+        <div *ngIf="showStateButton && !currentStatus.cutOff">
           <mat-button-toggle-group formControlName="state">
             <mat-button-toggle value="on" [checked]="currentStatus && currentStatus?.motor==='on'"
                                [disabled]="currentStatus && currentStatus?.motor==='on' || currentStatus && currentStatus.cutOff" (click)="changeMotorState('on', $event)">
