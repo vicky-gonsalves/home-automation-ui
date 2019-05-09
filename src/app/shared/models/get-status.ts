@@ -4,6 +4,7 @@ export class GetStatus {
   motor: string;
   automate: boolean;
   skipCutoff: boolean;
+  cutOff: boolean;
   tankFilled: number;
   waterHeight: number;
   websocket: string;

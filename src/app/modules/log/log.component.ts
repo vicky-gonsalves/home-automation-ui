@@ -10,7 +10,7 @@ import {LogService} from '../../shared/services/log/log.service';
 })
 export class LogComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  public displayedColumns = ['createdAt', 'action', 'motorOn',
+  public displayedColumns = ['createdAt', 'action', 'motorOn', 'cutOff',
     'automate', 'tankFilled', 'waterHeight', 'websocket', 'updatedByDevice', 'id'];
   public dataSource: MatTableDataSource<Log>;
   public paginatorOptions = {

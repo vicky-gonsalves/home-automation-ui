@@ -28,15 +28,20 @@
         <div *ngIf="showStateButton">
           <mat-button-toggle-group formControlName="state">
             <mat-button-toggle value="on" [checked]="currentStatus && currentStatus?.motor==='on'"
-                               [disabled]="currentStatus && currentStatus?.motor==='on'" (click)="changeMotorState('on', $event)">
+                               [disabled]="currentStatus && currentStatus?.motor==='on' || currentStatus && currentStatus.cutOff" (click)="changeMotorState('on', $event)">
               ON
             </mat-button-toggle>
             <mat-button-toggle value="off" [checked]="currentStatus && currentStatus?.motor==='off'"
-                               [disabled]="currentStatus && currentStatus?.motor==='off'" (click)="changeMotorState('off', $event)">
+                               [disabled]="currentStatus && currentStatus?.motor==='off' || currentStatus && currentStatus.cutOff" (click)="changeMotorState('off', $event)">
               OFF
             </mat-button-toggle>
           </mat-button-toggle-group>
         </div>
+      </div>
+      <br/>
+      <div *ngIf="currentStatus && currentStatus.cutOff">
+        <label><strong>Motor Cutoff Status : <span
+          class="text-uppercase red">Motor is Cut OFF because of no water</span></strong></label>
       </div>
       <br/>
       <!--<div>-->
