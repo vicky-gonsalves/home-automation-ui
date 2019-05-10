@@ -5,19 +5,30 @@
     {{ title }}
   </h1>
 
-
+  <div class="tank" *ngIf="currentStatus && currentStatus.tankFilled">
+    <div class="bowl">
+      <div class="inner">
+        <div class="fill" [ngStyle]="{'transform':'translate(0, '+(150-((150*currentStatus.tankFilled)/100))+'px)'}">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="300px" height="300px" viewBox="0 0 300 300"
+               enable-background="new 0 0 300 300" xml:space="preserve">
+        <path class="waveShape" d="M300,300V2.5c0,0-0.6-0.1-1.1-0.1c0,0-25.5-2.3-40.5-2.4c-15,0-40.6,2.4-40.6,2.4
+	c-12.3,1.1-30.3,1.8-31.9,1.9c-2-0.1-19.7-0.8-32-1.9c0,0-25.8-2.3-40.8-2.4c-15,0-40.8,2.4-40.8,2.4c-12.3,1.1-30.4,1.8-32,1.9
+	c-2-0.1-20-0.8-32.2-1.9c0,0-3.1-0.3-8.1-0.7V300H300z"/>
+      </svg>
+        </div>
+      </div>
+    </div>
+    <h1 class="overlap">{{currentStatus?.tankFilled}}%</h1>
+  </div>
   <form [formGroup]="tankForm" novalidate autocomplete="off">
     <div *ngIf="currentStatus && currentStatus.tankFilled">
       <p>
         <small>Tank Level: ({{currentStatus?.waterHeight}} cm / approx. {{currentStatus.tankFilled * 10}} Litres)</small>
-      </p>
-      <h1>{{currentStatus?.tankFilled}}%</h1>
-      <p>
+        <br>
+        <small>Tank Device: <strong>{{currentStatus && currentStatus.websocket ? currentStatus.websocket : 'Disconnected'}}</strong></small>
+        <br>
         <small>Last Updated: {{currentStatus?.updatedAt|date:'medium'}}</small>
       </p>
-    </div>
-    <div>
-      <p>Tank Device: <strong>{{currentStatus && currentStatus.websocket ? currentStatus.websocket : 'Disconnected'}}</strong></p>
     </div>
     <div *ngIf="currentStatus && currentStatus.websocket && currentStatus.websocket==='disconnected'">
       <p>Power outage or Device's internet connection is lost. Please wait until device is back online.</p>
@@ -28,28 +39,29 @@
         <div *ngIf="showStateButton && !currentStatus.cutOff">
           <mat-button-toggle-group formControlName="state">
             <mat-button-toggle value="on" [checked]="currentStatus && currentStatus?.motor==='on'"
-                               [disabled]="currentStatus && currentStatus?.motor==='on' || currentStatus && currentStatus.cutOff" (click)="changeMotorState('on', $event)">
+                               [disabled]="currentStatus && currentStatus?.motor==='on' || currentStatus && currentStatus.cutOff"
+                               (click)="changeMotorState('on', $event)">
               ON
             </mat-button-toggle>
             <mat-button-toggle value="off" [checked]="currentStatus && currentStatus?.motor==='off'"
-                               [disabled]="currentStatus && currentStatus?.motor==='off' || currentStatus && currentStatus.cutOff" (click)="changeMotorState('off', $event)">
+                               [disabled]="currentStatus && currentStatus?.motor==='off' || currentStatus && currentStatus.cutOff"
+                               (click)="changeMotorState('off', $event)">
               OFF
             </mat-button-toggle>
           </mat-button-toggle-group>
         </div>
       </div>
-      <br/>
       <div *ngIf="currentStatus && currentStatus.cutOff">
-        <label><strong>Motor Cutoff Status : <span
-          class="text-uppercase red">Motor is Cut OFF because of no water</span></strong></label>
+        <br/>
+        <label><strong><span class="text-uppercase red">Motor is Cut OFF because of no water</span></strong></label>
       </div>
       <br/>
       <!--<div>-->
-        <!--<label><strong>Motor Cutoff Status : <span-->
-          <!--class="text-uppercase">{{currentStatus && currentStatus.skipCutoff ? 'Motor will not cutoff' : 'Motor will cutoff'}}</span></strong></label>-->
-        <!--<div>-->
-          <!--<mat-checkbox [checked]="currentStatus && currentStatus?.skipCutoff" (change)="changeCutoffMode()">Don't Cutoff</mat-checkbox>-->
-        <!--</div>-->
+      <!--<label><strong>Motor Cutoff Status : <span-->
+      <!--class="text-uppercase">{{currentStatus && currentStatus.skipCutoff ? 'Motor will not cutoff' : 'Motor will cutoff'}}</span></strong></label>-->
+      <!--<div>-->
+      <!--<mat-checkbox [checked]="currentStatus && currentStatus?.skipCutoff" (change)="changeCutoffMode()">Don't Cutoff</mat-checkbox>-->
+      <!--</div>-->
       <!--</div>-->
       <!--<br/>-->
       <div class="m-b-10">
