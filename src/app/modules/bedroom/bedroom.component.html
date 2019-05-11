@@ -13,15 +13,15 @@
   <div *ngIf="bedroomStatus && bedroomStatus.websocket && bedroomStatus.websocket==='connected'">
     <div class="m-t-10 m-b-10">
       <label><strong>Tube Light : <span
-        class="text-uppercase">{{bedroomStatus && bedroomStatus.light1 ? 'ON' : 'OFF'}}</span></strong></label>
+        class="text-uppercase">{{bedroomStatus && bedroomStatus.light2 ? 'ON' : 'OFF'}}</span></strong></label>
       <div>
         <mat-button-toggle-group>
-          <mat-button-toggle value="true" [checked]="bedroomStatus && bedroomStatus.light1===true"
-                             [disabled]="bedroomStatus && bedroomStatus.light1===true" (click)="changeLightMode(1,true)">
+          <mat-button-toggle value="true" [checked]="bedroomStatus && bedroomStatus.light2===true"
+                             [disabled]="bedroomStatus && bedroomStatus.light2===true" (click)="changeLightMode(2,true)">
             ON
           </mat-button-toggle>
-          <mat-button-toggle value="false" [checked]="bedroomStatus && bedroomStatus.light1===false"
-                             [disabled]="bedroomStatus && bedroomStatus.light1===false" (click)="changeLightMode(1, false)">
+          <mat-button-toggle value="false" [checked]="bedroomStatus && bedroomStatus.light2===false"
+                             [disabled]="bedroomStatus && bedroomStatus.light2===false" (click)="changeLightMode(2, false)">
             OFF
           </mat-button-toggle>
         </mat-button-toggle-group>
