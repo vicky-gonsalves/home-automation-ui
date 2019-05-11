@@ -1,6 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatTableDataSource, PageEvent} from '@angular/material';
+import {Dev} from '../../shared/models/dev';
+import {GetStatus} from '../../shared/models/get-status';
 import {Log} from '../../shared/models/log';
+import {DevService} from '../../shared/services/dev/dev.service';
+import {GetStatusService} from '../../shared/services/get-status/get-status.service';
 import {LogService} from '../../shared/services/log/log.service';
 
 @Component({
@@ -22,11 +26,26 @@ export class LogComponent implements OnInit {
   public inProgress = true;
   private sortBy = '-createdAt';
   private pageSize = 10;
+  currentStatus: GetStatus;
+  devLog: Dev;
 
-  constructor(private logService: LogService) {
+  constructor(private logService: LogService,
+              private getStatusService: GetStatusService,
+              private devService: DevService) {
   }
 
   ngOnInit() {
+    this.getStatusService.currentStatus.subscribe((status: GetStatus) => {
+      this.currentStatus = status;
+    });
+    this.getStatusService.updatedStatus.subscribe((status: GetStatus) => {
+      this.currentStatus = status;
+    });
+    this.devService.devLogs.subscribe((log: Dev) => {
+      this.devLog = log;
+      console.log(this.devLog);
+    });
+
     // Fetch Logs
     this.fetchLogListing();
   }
@@ -57,4 +76,9 @@ export class LogComponent implements OnInit {
           this.inProgress = false;
         });
   }
+
+  changeDevLogs(mode: boolean) {
+    this.getStatusService.putStatus({devLogs: mode, updatedByDevice: false});
+  }
+
 }

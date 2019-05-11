@@ -1,4 +1,27 @@
 <mat-divider></mat-divider>
+<br>
+<div>
+  DevLogs:
+  <mat-button-toggle-group>
+    <mat-button-toggle value="on" [checked]="currentStatus && currentStatus?.devLogs"
+                       (click)="changeDevLogs(true, $event)">
+      ON
+    </mat-button-toggle>
+    <mat-button-toggle value="off" [checked]="currentStatus && !currentStatus.devLogs"
+                       (click)="changeDevLogs(false, $event)">
+      OFF
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
+<br>
+<div *ngIf="currentStatus && currentStatus.devLogs">
+  Pulse:
+  <div *ngIf="devLog">
+    <small>{{devLog?.distance}}cm</small>
+  </div>
+</div>
+<br>
+<mat-divider></mat-divider>
 <div class="page"></div>
 <mat-card class="list" *ngIf="!dataSource">
   <div fxLayout="column" fxLayoutAlign="center center">
@@ -57,9 +80,9 @@
       </ng-container>
 
       <!--<ng-container matColumnDef="skipCutoff">-->
-        <!--<mat-header-cell *matHeaderCellDef>skipCutoff</mat-header-cell>-->
-        <!--<mat-cell *matCellDef="let element"><span-->
-          <!--matTooltip="{{element.skipCutoff}}">{{element.skipCutoff}}</span></mat-cell>-->
+      <!--<mat-header-cell *matHeaderCellDef>skipCutoff</mat-header-cell>-->
+      <!--<mat-cell *matCellDef="let element"><span-->
+      <!--matTooltip="{{element.skipCutoff}}">{{element.skipCutoff}}</span></mat-cell>-->
       <!--</ng-container>-->
 
       <ng-container matColumnDef="websocket">

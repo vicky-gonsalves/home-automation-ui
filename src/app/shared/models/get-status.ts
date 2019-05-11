@@ -9,6 +9,7 @@ export class GetStatus {
   waterHeight: number;
   websocket: string;
   updatedByDevice: boolean;
+  devLogs: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
