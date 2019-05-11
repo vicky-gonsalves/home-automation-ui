@@ -3,8 +3,10 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {SwPush} from '@angular/service-worker';
 import {ConfirmComponent} from './shared/components/dialogs/confirm/confirm.component';
+import {Dev} from './shared/models/dev';
 import {GetStatus} from './shared/models/get-status';
 import {Light} from './shared/models/light';
+import {DevService} from './shared/services/dev/dev.service';
 import {GetStatusService} from './shared/services/get-status/get-status.service';
 import {LightService} from './shared/services/light/light.service';
 import {PushNotificationService} from './shared/services/push-notification/push-notification.service';
@@ -17,6 +19,7 @@ import {PushNotificationService} from './shared/services/push-notification/push-
 export class AppComponent implements OnInit {
   title = 'Automatic Tank & Lights System';
   currentStatus: GetStatus;
+  devLog: Dev;
   currentLightStatus: Light;
   showStateButton = true;
   public tankForm: FormGroup;
@@ -24,6 +27,7 @@ export class AppComponent implements OnInit {
 
 
   constructor(private getStatusService: GetStatusService,
+              private devService: DevService,
               private lightService: LightService,
               private dialog: MatDialog,
               private pushService: PushNotificationService,
@@ -54,6 +58,11 @@ export class AppComponent implements OnInit {
       this.currentStatus = status;
       console.log(this.currentStatus);
     });
+    this.devService.devLogs.subscribe((log: Dev) => {
+      this.devLog = log;
+      console.log(this.devLog);
+    });
+
     this.getStatusService.updatedStatus.subscribe((status: GetStatus) => {
       this.currentStatus = status;
       console.log(this.currentStatus);
