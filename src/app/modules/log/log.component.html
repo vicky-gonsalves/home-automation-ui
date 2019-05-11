@@ -1,6 +1,6 @@
 <mat-divider></mat-divider>
 <br>
-<div>
+<div style="text-align: center">
   DevLogs:
   <mat-button-toggle-group>
     <mat-button-toggle value="on" [checked]="currentStatus && currentStatus?.devLogs"
@@ -14,7 +14,7 @@
   </mat-button-toggle-group>
 </div>
 <br>
-<div *ngIf="currentStatus && currentStatus.devLogs">
+<div *ngIf="currentStatus && currentStatus.devLogs" style="text-align: center">
   Pulse:
   <div *ngIf="devLog">
     <small>{{devLog?.distance}}cm</small>
@@ -34,6 +34,7 @@
     </div>
   </div>
 </mat-card>
+<br>
 <mat-card class="list-wrapper" *ngIf="dataSource">
   <div class="list-table">
     <mat-table #table [dataSource]="dataSource">

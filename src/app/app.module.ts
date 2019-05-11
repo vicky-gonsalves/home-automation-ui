@@ -23,6 +23,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LogComponent} from './modules/log/log.component';
 import {ConfirmComponent} from './shared/components/dialogs/confirm/confirm.component';
+import { DashboardComponent } from './modules/dashboard/dashboard.component';
 
 const config: SocketIoConfig = {url: environment.domain, options: {}};
 
@@ -30,7 +31,8 @@ const config: SocketIoConfig = {url: environment.domain, options: {}};
   declarations: [
     AppComponent,
     ConfirmComponent,
-    LogComponent
+    LogComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserAnimationsModule,
