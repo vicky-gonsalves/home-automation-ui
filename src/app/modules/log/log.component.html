@@ -4,11 +4,11 @@
   DevLogs:
   <mat-button-toggle-group>
     <mat-button-toggle value="on" [checked]="currentStatus && currentStatus?.devLogs"
-                       (click)="changeDevLogs(true, $event)">
+                       (click)="changeDevLogs(true)">
       ON
     </mat-button-toggle>
     <mat-button-toggle value="off" [checked]="currentStatus && !currentStatus.devLogs"
-                       (click)="changeDevLogs(false, $event)">
+                       (click)="changeDevLogs(false)">
       OFF
     </mat-button-toggle>
   </mat-button-toggle-group>
