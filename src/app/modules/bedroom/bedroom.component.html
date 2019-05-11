@@ -15,7 +15,7 @@
       <label><strong>Tube Light : <span
         class="text-uppercase">{{bedroomStatus && bedroomStatus.light1 ? 'ON' : 'OFF'}}</span></strong></label>
       <div>
-        <mat-button-toggle-group formControlName="light1">
+        <mat-button-toggle-group>
           <mat-button-toggle value="true" [checked]="bedroomStatus && bedroomStatus.light1===true"
                              [disabled]="bedroomStatus && bedroomStatus.light1===true" (click)="changeLightMode(1,true)">
             ON
@@ -31,7 +31,7 @@
       <label><strong>Fan : <span
         class="text-uppercase">{{bedroomStatus && bedroomStatus.fan ? 'ON' : 'OFF'}}</span></strong></label>
       <div>
-        <mat-button-toggle-group formControlName="fan">
+        <mat-button-toggle-group>
           <mat-button-toggle value="true" [checked]="bedroomStatus && bedroomStatus.fan===true"
                              [disabled]="bedroomStatus && bedroomStatus.light3===true" (click)="changeLightMode(4,true)">
             ON
@@ -43,7 +43,6 @@
         </mat-button-toggle-group>
       </div>
     </div>
-    <mat-divider></mat-divider>
     <mat-divider></mat-divider>
   </div>
 </div>
