@@ -28,11 +28,28 @@ export class BedroomComponent implements OnInit {
 
   changeLightMode(light: number, mode: boolean) {
     const online = this.bedroomStatus.websocket === 'connected';
-    if (light === 2) {
-      this.bedroomService.putBedroomStatus(online, {light2: mode, updatedByDevice: false});
-    }
-    if (light === 4) {
-      this.bedroomService.putBedroomStatus(online, {fan: mode, updatedByDevice: false});
+    let action = '';
+    if (!online) {
+      if (light === 2 && mode === true) {
+        action = 'light2on';
+      } else if (light === 2 && mode === false) {
+        action = 'light2off';
+      } else if (light === 4 && mode === true) {
+        action = 'fanon';
+      } else if (light === 4 && mode === false) {
+        action = 'fanoff';
+      }
+      this.bedroomService.performLocalAction(action).subscribe(response => {
+        console.log(response);
+        this.bedroomStatus = response;
+      });
+    } else {
+      if (light === 2) {
+        this.bedroomService.putBedroomStatus({light2: mode, updatedByDevice: false});
+      }
+      if (light === 4) {
+        this.bedroomService.putBedroomStatus({fan: mode, updatedByDevice: false});
+      }
     }
   }
 }

@@ -17,25 +17,8 @@ export class BedroomService {
               private http: HttpClient) {
   }
 
-  putBedroomStatus(online: boolean, data: any) {
-    if (online) {
-      this.socket.emit('bedroom:put', data);
-    } else {
-      let action = '';
-      if (data && data.fan === true) {
-        action = 'fanon';
-      }
-      if (data && data.fan === false) {
-        action = 'fanoff';
-      }
-      if (data && data.light2 === true) {
-        action = 'light2on';
-      }
-      if (data && data.light2 === false) {
-        action = 'light2off';
-      }
-      this.performLocalAction(action);
-    }
+  putBedroomStatus(data: any) {
+    this.socket.emit('bedroom:put', data);
   }
 
   public performLocalAction(action: string): Observable<any> {
