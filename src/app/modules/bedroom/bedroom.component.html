@@ -10,7 +10,7 @@
   <div *ngIf="bedroomStatus && bedroomStatus.websocket && bedroomStatus.websocket==='disconnected'">
     <p>Bedroom device is disconnected. Commands will be sent using local wifi.</p>
   </div>
-  <div>
+  <div *ngIf="bedroomStatus && bedroomStatus.websocket && bedroomStatus.websocket==='connected'">
     <div class="m-t-10 m-b-10">
       <label><strong>Tube Light : <span
         class="text-uppercase">{{bedroomStatus && bedroomStatus.light2 ? 'ON' : 'OFF'}}</span></strong></label>
@@ -44,5 +44,8 @@
       </div>
     </div>
     <mat-divider></mat-divider>
+  </div>
+  <div *ngIf="bedroomStatus && bedroomStatus.websocket && bedroomStatus.websocket==='disconnected'">
+    <iframe [src]="frameUrl" style="border:none" width="100%" height="500px"></iframe>
   </div>
 </div>
