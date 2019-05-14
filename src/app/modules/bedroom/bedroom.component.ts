@@ -20,7 +20,9 @@ export class BedroomComponent implements OnInit {
       fromEvent(window, 'online').pipe(mapTo(true)),
       fromEvent(window, 'offline').pipe(mapTo(false))
     );
-    console.log(this.online$);
+    this.online$.subscribe(ree => {
+      console.log(ree);
+    });
   }
 
   ngOnInit() {

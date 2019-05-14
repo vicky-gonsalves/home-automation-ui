@@ -22,6 +22,6 @@ export class BedroomService {
   }
 
   public performLocalAction(action: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${action}`);
+    return this.http.get<any>(`${this.apiUrl}${action}`);
   }
 }
