@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   domain: 'http://localhost:9000',
-  apiUrl: 'http://localhost:9000/api/'
+  apiUrl: 'http://localhost:9000/api/',
+  localBedroomHost: 'http://192.168.3.9/'
 };
 
 /*
