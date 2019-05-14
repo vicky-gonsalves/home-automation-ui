@@ -8,9 +8,9 @@
       <strong>{{bedroomStatus && bedroomStatus.websocket ? bedroomStatus.websocket : 'Disconnected'}}</strong></p>
   </div>
   <div *ngIf="bedroomStatus && bedroomStatus.websocket && bedroomStatus.websocket==='disconnected'">
-    <p>Power outage or Device's internet connection is lost. Please wait until device is back online.</p>
+    <p>Bedroom device is disconnected. Commands will be sent using local wifi.</p>
   </div>
-  <div *ngIf="bedroomStatus && bedroomStatus.websocket && bedroomStatus.websocket==='connected'">
+  <div>
     <div class="m-t-10 m-b-10">
       <label><strong>Tube Light : <span
         class="text-uppercase">{{bedroomStatus && bedroomStatus.light2 ? 'ON' : 'OFF'}}</span></strong></label>
