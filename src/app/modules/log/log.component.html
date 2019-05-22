@@ -17,7 +17,9 @@
 <div *ngIf="currentStatus && currentStatus.devLogs" style="text-align: center">
   Pulse:
   <div *ngIf="devLog">
-    <small>{{devLog?.distance}}cm</small>
+    <small>{{devLog?.distance}}cm</small><br/>
+    <small>{{devLog?.flowRate}} ml/sec</small><br/>
+    <small>{{devLog?.quantity}} ml</small>
   </div>
 </div>
 <br>
