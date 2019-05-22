@@ -24,8 +24,8 @@
         <small>Tank Level: ({{currentStatus?.waterHeight}} cm / approx. {{currentStatus.tankFilled * 10}} Litres)</small>
         <br>
         <span *ngIf="currentStatus && currentStatus?.motor==='on'">
-          <small><span *ngIf="currentStatus.flowRate">Flow Rate: ({{currentStatus?.flowRate}} mL/Sec. </span><span
-            *ngIf="currentStatus.quantity">({{currentStatus?.quantity / 1000}} Ltrs filled since motor started)</span></small>
+          <small><span>Flow Rate: ({{currentStatus?.flowRate}} mL/Sec. </span><span
+          >({{currentStatus?.quantity / 1000}} Ltrs filled since motor started)</span></small>
           <br>
         </span>
         <small>Tank Device: <strong>{{currentStatus && currentStatus.websocket ? currentStatus.websocket : 'Disconnected'}}</strong></small>
