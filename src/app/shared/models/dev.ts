@@ -3,7 +3,7 @@ export class Dev {
   identifier: string;
   distance: number;
   flowRate: number;
-  quantity: number;
+  totalMilliLitres: number;
   createdAt: Date;
   updatedAt: Date;
 }
