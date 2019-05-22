@@ -17,8 +17,10 @@
 <div *ngIf="currentStatus && currentStatus.devLogs" style="text-align: center">
   Pulse:
   <div *ngIf="devLog">
-    <small>{{devLog?.distance}}cm</small><br/>
-    <small>{{devLog?.flowRate}} ml/sec</small><br/>
+    <small>{{devLog?.distance}}cm</small>
+    <br/>
+    <small>{{devLog?.flowRate}} ml/sec</small>
+    <br/>
     <small>{{devLog?.totalMilliLitres}} ml</small>
   </div>
 </div>
@@ -62,6 +64,18 @@
         <mat-header-cell *matHeaderCellDef>cutOff</mat-header-cell>
         <mat-cell *matCellDef="let element"><span
           matTooltip="{{element.cutOff}}">{{element.cutOff}}</span></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="quantity">
+        <mat-header-cell *matHeaderCellDef>quantity</mat-header-cell>
+        <mat-cell *matCellDef="let element"><span
+          matTooltip="{{element.quantity}}">{{element.quantity}}</span></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="flowRate">
+        <mat-header-cell *matHeaderCellDef>flowRate</mat-header-cell>
+        <mat-cell *matCellDef="let element"><span
+          matTooltip="{{element.flowRate}}">{{element.flowRate}}</span></mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="automate">
