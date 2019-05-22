@@ -6,6 +6,8 @@ export class Log {
   automate: boolean;
   tankFilled: number;
   waterHeight?: boolean;
+  quantity?: number;
+  flowRate?: number;
   skipCutoff: boolean;
   updatedByDevice: boolean;
   websocket: boolean;
