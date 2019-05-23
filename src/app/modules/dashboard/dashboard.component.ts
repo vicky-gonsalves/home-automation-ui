@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {SwPush} from '@angular/service-worker';
+import * as moment from 'moment';
 import {ConfirmComponent} from '../../shared/components/dialogs/confirm/confirm.component';
 import {GetStatus} from '../../shared/models/get-status';
 import {Light} from '../../shared/models/light';
@@ -141,6 +142,10 @@ export class DashboardComponent implements OnInit {
   toggleAllLightsStatus() {
     this.currentLightStatus.allLights = this.currentLightStatus && this.currentLightStatus.light1 &&
       this.currentLightStatus.light2 && this.currentLightStatus.light3 && this.currentLightStatus.light4;
+  }
+
+  getCutOffReleaseTime(cutOffAt) {
+    return moment(cutOffAt).add(2, 'hours');
   }
 
 }

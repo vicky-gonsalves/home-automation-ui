@@ -5,6 +5,7 @@ export class GetStatus {
   automate: boolean;
   skipCutoff: boolean;
   cutOff: boolean;
+  cutOffAt: Date;
   tankFilled: number;
   waterHeight: number;
   websocket: string;
