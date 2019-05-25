@@ -145,7 +145,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getCutOffReleaseTime(cutOffAt) {
-    return moment(cutOffAt).add(2, 'hours');
+    return moment(cutOffAt).add(4, 'hours');
   }
 
 }
