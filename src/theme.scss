@@ -1,6 +1,7 @@
 @import '~@angular/material/theming';
 @import './styles/svg-theme';
 @import './app/app-component.theme';
+@import './app/shared/components/navbar/navbar-theme';
 
 
 @mixin app-theme($theme) {
@@ -56,6 +57,7 @@
   }
 
   @include app-component-theme($theme);
+  @include nav-bar-theme($theme);
 
 }
 

@@ -1,1 +1,112 @@
 
+
+.list {
+  width: 95%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.list-wrapper {
+  width: 95%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+
+  .list-table {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    overflow-x: auto;
+  }
+}
+
+.modal-list {
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.modal-list-wrapper {
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+
+  .list-table {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    overflow-x: auto;
+  }
+}
+
+.form-container {
+  width: 95%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.field {
+  min-height: 65px;
+}
+
+.full-width {
+  width: 100%;
+  max-width: 100%;
+}
+
+.mat-button-wrapper {
+  white-space: pre-line !important;
+}
+
+mat-cell > span {
+  display: block !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+mat-header-cell, mat-cell {
+  margin-right: 10px;
+}
+
+.panelClass {
+  display: flex !important;
+  flex-direction: column !important;
+  max-height: 95% !important;
+  width: 95% !important;
+}
+
+.transparent-backdrop {
+  opacity: 0 !important;
+}
+
+.caption_view {
+  font-size: 12px !important;
+}
+
+.info {
+  font-size: 14px !important;
+}
+
+.info-line {
+  margin-bottom: 24px;
+  min-height: 40px;
+}
+
+.mat-table {
+  width: 100%;
+  max-width: 100%;
+  display: table;
+  border-collapse: collapse;
+  margin: 0;
+  overflow-x: auto !important;
+}
+
+mat-paginator {
+  position: relative;
+}
+
+.clearBackdrop {
+  opacity: 0;
+}

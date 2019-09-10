@@ -1,0 +1,38 @@
+<mat-toolbar class="comp-navbar-header">
+
+  <div fxFlex fxFill fxLayout="row" fxLayoutAlign="start center">
+
+    <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
+
+      <div class="toolbar-separator" fxHide.gt-md></div>
+
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <a mat-button class="comp-button" routerLink="/">
+          <span class="res_font">Automated Tank & Light System</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="toolbar-separator" fxHide.gt-md></div>
+
+    <div fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
+      <button fxHide fxShow.gt-sm mat-button [matMenuTriggerFor]="userMenu" class="comp-button">
+        <span fxLayout="row" fxLayoutAlign="center center">
+<!--          <span fxHide fxShow.gt-sm>{{identity?.firstName}} {{identity?.lastName}} </span>-->
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </span>
+      </button>
+      <button fxHide fxShow.lt-md mat-icon-button [matMenuTriggerFor]="userMenu" class="comp-button">
+        <span fxLayout="row" fxLayoutAlign="center center">
+          <mat-icon>more_vert</mat-icon>
+        </span>
+      </button>
+      <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+        <button mat-menu-item (click)="showSettings()">
+          <mat-icon>settings_applications</mat-icon>
+          <span>Settings</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</mat-toolbar>

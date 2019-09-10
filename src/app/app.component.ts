@@ -6,6 +6,11 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  public routeData: any = {
+    hideNavBar: false,
+    hideSideNav: true,
+    hideHeader: false
+  };
 
   constructor() {
   }

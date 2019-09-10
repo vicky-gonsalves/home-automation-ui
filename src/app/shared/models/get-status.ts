@@ -11,6 +11,7 @@ export class GetStatus {
   websocket: string;
   flowRate: number;
   quantity: number;
+  maxMotorOnTime: number;
   updatedByDevice: boolean;
   devLogs: boolean;
   createdAt: Date;
