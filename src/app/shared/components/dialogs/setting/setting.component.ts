@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {GetStatus} from '../../../models/get-status';
 import {ErrorMessageService} from '../../../services/error-message/error-message.service';
 import {GetStatusService} from '../../../services/get-status/get-status.service';
 
@@ -26,11 +25,6 @@ export class SettingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getStatusService.updatedStatus.subscribe((status: GetStatus) => {
-      this.settings.maxMotorOnTime = status.maxMotorOnTime;
-      this.setValue();
-    });
-
     this.fetchSettings();
     this.setupForm();
   }
