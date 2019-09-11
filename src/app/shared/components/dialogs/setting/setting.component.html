@@ -4,7 +4,7 @@
     <form [formGroup]="settingsForm" (ngSubmit)="submitSettingsForm()" novalidate autocomplete="off">
       <div>
         <mat-form-field class="field full-width">
-          <input type="text" matInput placeholder="Max Motor On Time" formControlName="maxMotorOnTime">
+          <input type="text" matInput placeholder="Max Motor On Time (Minutes)" formControlName="maxMotorOnTime">
           <mat-error *ngIf="maxMotorOnTime.invalid">{{getErrorMessage('maxMotorOnTime')}}</mat-error>
         </mat-form-field>
       </div>
