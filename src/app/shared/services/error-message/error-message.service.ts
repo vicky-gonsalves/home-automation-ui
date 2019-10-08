@@ -288,6 +288,11 @@ export class ErrorMessageService {
       pattern: 'Maximum motor on time must be a number',
       min: 'Maximum motor on time must be greater than 0'
     },
+    minMotorOnPercentage: {
+      required: 'Please enter min water level to start the motor',
+      pattern: 'Must be a number',
+      min: 'Must be greater than 0'
+    },
   };
 
   constructor(public snackBar: MatSnackBar) {

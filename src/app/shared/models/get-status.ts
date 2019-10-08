@@ -12,6 +12,7 @@ export class GetStatus {
   flowRate: number;
   quantity: number;
   maxMotorOnTime: number;
+  minMotorOnPercentage: number;
   updatedByDevice: boolean;
   devLogs: boolean;
   createdAt: Date;

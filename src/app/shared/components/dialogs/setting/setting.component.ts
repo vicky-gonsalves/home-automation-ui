@@ -14,7 +14,7 @@ export class SettingComponent implements OnInit {
   public settingsForm: FormGroup;
   public inProgress = false;
   public submitted = false;
-  public settings = {maxMotorOnTime: 30};
+  public settings = {maxMotorOnTime: 30, minMotorOnPercentage: 70};
 
 
   constructor(private dialogRef: MatDialogRef<SettingComponent>,
@@ -33,12 +33,17 @@ export class SettingComponent implements OnInit {
     return this.settingsForm.get('maxMotorOnTime');
   }
 
+  get minMotorOnPercentage() {
+    return this.settingsForm.get('minMotorOnPercentage');
+  }
+
   private fetchSettings() {
     this.inProgress = true;
     this.getStatusService.getStatus('status')
       .subscribe(response => {
           if (response) {
             this.settings.maxMotorOnTime = response.maxMotorOnTime;
+            this.settings.minMotorOnPercentage = response.minMotorOnPercentage;
             this.setValue();
           } else {
             this.errorMessageService.openSnackBar(this.errorMessageService.getNonFormError('NO_DATA'));
@@ -67,6 +72,11 @@ export class SettingComponent implements OnInit {
         Validators.required,
         Validators.min(1),
         Validators.pattern(/^[\d]+$/)
+      ]),
+      minMotorOnPercentage: new FormControl('', [
+        Validators.required,
+        Validators.min(1),
+        Validators.pattern(/^[\d]+$/)
       ])
     });
   }
@@ -74,10 +84,13 @@ export class SettingComponent implements OnInit {
   submitSettingsForm() {
     this.submitted = true;
     this.settings = this.prepareFormFields();
-    console.log(this.settings);
     if (this.settingsForm.valid) {
       this.setInProgress();
-      this.getStatusService.putStatus({maxMotorOnTime: this.settings.maxMotorOnTime, updatedByDevice: false});
+      this.getStatusService.putStatus({
+        maxMotorOnTime: this.settings.maxMotorOnTime,
+        minMotorOnPercentage: this.settings.minMotorOnPercentage,
+        updatedByDevice: false
+      });
       this.errorMessageService.openSnackBar('Settings successfully updated.', 5000, 'OK');
       this.dismissModal();
     }
@@ -86,14 +99,16 @@ export class SettingComponent implements OnInit {
   private prepareFormFields() {
     const formModel = this.settingsForm.value;
     return {
-      maxMotorOnTime: formModel.maxMotorOnTime
+      maxMotorOnTime: formModel.maxMotorOnTime,
+      minMotorOnPercentage: formModel.minMotorOnPercentage
     };
   }
 
   private setValue(): void {
     setTimeout(() => {
       this.settingsForm.patchValue({
-        maxMotorOnTime: this.settings.maxMotorOnTime
+        maxMotorOnTime: this.settings.maxMotorOnTime,
+        minMotorOnPercentage: this.settings.minMotorOnPercentage
       });
     });
   }
