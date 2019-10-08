@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {Observable} from 'rxjs';
 import {ProgressBarService} from '../progress-bar/progress-bar.service';
 

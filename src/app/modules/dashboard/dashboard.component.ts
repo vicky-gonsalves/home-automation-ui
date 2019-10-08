@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {MatDialog, MatDialogConfig} from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import {SwPush} from '@angular/service-worker';
 import * as moment from 'moment';
 import {ConfirmComponent} from '../../shared/components/dialogs/confirm/confirm.component';

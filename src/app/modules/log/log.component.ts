@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatTableDataSource, PageEvent} from '@angular/material';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import {Dev} from '../../shared/models/dev';
 import {GetStatus} from '../../shared/models/get-status';
 import {Log} from '../../shared/models/log';
