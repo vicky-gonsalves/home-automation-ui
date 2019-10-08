@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
 import {Dev} from '../../shared/models/dev';
 import {GetStatus} from '../../shared/models/get-status';
 import {Log} from '../../shared/models/log';
@@ -14,7 +14,7 @@ import {LogService} from '../../shared/services/log/log.service';
   styleUrls: ['./log.component.scss']
 })
 export class LogComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   public displayedColumns = ['createdAt', 'action', 'motorOn', 'cutOff', 'quantity', 'flowRate',
     'automate', 'tankFilled', 'waterHeight', 'websocket', 'updatedByDevice', 'id'];
   public dataSource: MatTableDataSource<Log>;
